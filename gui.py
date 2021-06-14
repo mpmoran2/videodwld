@@ -2,13 +2,17 @@ from tkinter import *
 from tkinter import filedialog
 from pytube import YouTube
 from moviepy.editor import *
+import shutil
 
 def download():
     video_path = url_entry.get()
     file_path = path_label.cget("text")
+    print("Please stand by, downloading...")
     mp4 = YouTube(video_path).streams.get_highest_resolution().download()
     vid_clip = VideoFileClip(mp4)
     vid_clip.close()
+    shutil.move(mp4, file_path)
+    print('Download Completed')
 
 def get_path():
     path = filedialog.askdirectory()
