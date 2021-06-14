@@ -10,6 +10,12 @@ def download():
     print("Please stand by, downloading...")
     mp4 = YouTube(video_path).streams.get_highest_resolution().download()
     vid_clip = VideoFileClip(mp4)
+    #code for mp3 end
+    audio_file = vid_clip.audio
+    audio_file.write_audiofile('audio.mp3')
+    audio_file.close()
+    shutil.move('audio.mp3', file_path)
+    #code for mp3 end
     vid_clip.close()
     shutil.move(mp4, file_path)
     print('Download Completed')
